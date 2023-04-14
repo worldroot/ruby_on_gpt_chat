@@ -1,7 +1,8 @@
 <%= form_with(model: message, url: messages_path, local: true, class: 'mt-4') do |form| %>
+  <%=form.hidden_field :room_id, value: room_id %>
   <div class="flex flex-col space-y-2">
     <%= form.label :content, 'Mensagem' %>
-    <%= form.text_field :content, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+    <%= form.text_field :content, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full", required: :required %>
   </div>
   <div class="flex justify-end mt-2">
     <%= form.submit 'Enviar', class: 'bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700 focus:outline-none focus:shadow-outline-blue active:bg-blue-800' %>
