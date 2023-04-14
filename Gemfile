@@ -83,9 +83,9 @@ gem 'tailwindcss-rails'
 gem 'sass-rails', '~> 6.0.0'
 gem 'simplecov', require: false, group: :test
 
+gem 'byebug'
 gem 'devise'
 gem 'devise-i18n'
 gem 'dotenv-rails', groups: %i[development test]
 gem 'pg', '~> 1.4'
-gem 'pry'
 gem 'rails-i18n'

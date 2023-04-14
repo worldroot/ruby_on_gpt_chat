@@ -1,15 +1,21 @@
 <div class="flex mb-4" id="<%= dom_id message %>">
   <% if message.user %>
     <div class="w-1/6 flex-shrink-0 mr-4">
-      <span class="block text-gray-400 text-xs mt-2"><%= message.user.name %></span>
+      <span class="block text-gray-400 text-xs mt-2"><%= message.user.name %> - <%=l message.created_at, format: :short%></span>
+    </div>
+    <div class="w-5/6">
+      <div class="bg-gray-100 rounded-lg p-2">
+        <%= simple_format(message.content) %>
+      </div>
+    </div>
+  <% else %>
+    <div class="w-5/6">
+      <div class="bg-gray-100 rounded-lg p-2">
+        <%= simple_format(message.content) %>
+      </div>
+    </div>
+    <div class="w-1/6 flex-shrink-0 mr-4">
+      <span class="block text-gray-400 text-xs mt-2 text-right"><%= message.replier.name %> - <%=l message.created_at, format: :short%></span>
     </div>
   <% end %>
-  <div class="w-5/6 <%= 'ml-auto' if message.replier %>" <%= 'data-replier="true"' if message.replier %>>
-    <div class="bg-gray-100 rounded-lg p-4">
-      <%= simple_format(message.content) %>
-    </div>
-    <% if message.replier %>
-      <div class="text-right text-gray-400 mt-2"><%= message.replier.name %></div>
-    <% end %>
-  </div>
 </div>
