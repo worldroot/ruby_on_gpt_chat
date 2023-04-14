@@ -87,4 +87,5 @@ gem 'devise'
 gem 'devise-i18n'
 gem 'dotenv-rails', groups: %i[development test]
 gem 'pg', '~> 1.4'
+gem 'pry'
 gem 'rails-i18n'

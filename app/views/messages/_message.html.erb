@@ -1,12 +1,15 @@
-<div id="<%= dom_id message %>">
-  <p class="my-5">
-    <strong class="block font-medium mb-1">Content:</strong>
-    <%= message.content %>
-  </p>
-
-  <% if action_name != "show" %>
-    <%= link_to "Show this message", message, class: "rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
-    <%= link_to 'Edit this message', edit_message_path(message), class: "rounded-lg py-3 ml-2 px-5 bg-gray-100 inline-block font-medium" %>
-    <hr class="mt-6">
+<div class="flex mb-4" id="<%= dom_id message %>">
+  <% if message.user %>
+    <div class="w-1/6 flex-shrink-0 mr-4">
+      <span class="block text-gray-400 text-xs mt-2"><%= message.user.name %></span>
+    </div>
   <% end %>
+  <div class="w-5/6 <%= 'ml-auto' if message.replier %>" <%= 'data-replier="true"' if message.replier %>>
+    <div class="bg-gray-100 rounded-lg p-4">
+      <%= simple_format(message.content) %>
+    </div>
+    <% if message.replier %>
+      <div class="text-right text-gray-400 mt-2"><%= message.replier.name %></div>
+    <% end %>
+  </div>
 </div>
