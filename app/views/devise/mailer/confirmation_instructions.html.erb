@@ -1,0 +1,7 @@
+<div class="bg-gray-100 rounded-lg p-6">
+  <p class="mb-4">Olá <%= @resource.email %>!</p>
+  <p class="mb-4">Clique no botão abaixo para confirmar sua conta:</p>
+  <%= link_to 'Confirmar minha conta', confirmation_url(@resource, confirmation_token: @token), class: 'bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline' %>
+  <p class="mt-4">Obrigado,</p>
+  <p><%= mailer_name.capitalize %></p>
+</div>

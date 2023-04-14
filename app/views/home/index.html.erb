@@ -1,0 +1,62 @@
+<div class="container mx-auto py-8">
+  <h1 class="text-3xl font-bold mb-4">Bem-vindo ao ChatGPT</h1>
+  <p class="text-gray-600 mb-8">Aqui você pode conversar com outras pessoas em salas de chat. Comece criando uma nova sala abaixo ou escolha uma das salas existentes.</p>
+  <%= turbo_stream_from "room" %>
+  <%= turbo_frame_tag "room" do %>
+  <div id="room">
+    <%= render partial: 'rooms/form', locals: { room: Room.new } %>
+  </div>
+  <% end %>
+
+  <% if current_room %>
+  <div class="mt-12">
+    <h2 class="text-xl font-bold my-6">Mensagens</h2>
+    <div class="flex flex-col h-full">
+      <div class="flex items-center justify-between bg-gray-600 text-white p-4 rounded-t-lg">
+        <h1 class="text-2xl font-bold"><%= current_room.title %></h1>
+        <p class="text-gray-400"><%= current_room.user.name %> criou a sala</p>
+      </div>
+      <div class="flex-grow overflow-y-auto p-4 bg-gray-200 rounded-b-lg">
+        <% if current_room.messages.any? %>
+          <div class="text-right text-gray-400 mb-4"><%= pluralize(current_room.messages.count, 'mensagem') %></div>
+          <% current_room.messages.each do |message| %>
+            <div class="flex mb-4">
+              <% if message.user %>
+                <div class="w-1/6 flex-shrink-0 mr-4">
+                  <%= image_tag message.user.avatar_url, alt: message.user.name, class: 'rounded-full' if message.user.avatar_url.present? %>
+                  <span class="block text-gray-400 text-xs mt-2"><%= message.user.name %></span>
+                </div>
+              <% end %>
+              <div class="w-5/6 <%= 'ml-auto' if message.replier %>" <%= 'data-replier="true"' if message.replier %>>
+                <div class="bg-gray-100 rounded-lg p-4">
+                  <%= simple_format(message.content) %>
+                </div>
+                <% if message.replier %>
+                  <div class="text-right text-gray-400 mt-2"><%= message.replier.name %></div>
+                <% end %>
+              </div>
+            </div>
+          <% end %>
+        <% else %>
+          <p class="text-gray-400 text-center mt-8">Ainda não há mensagens nesta sala.</p>
+        <% end %>
+      </div>
+      <%= turbo_stream_from "message" %>
+      <%= turbo_frame_tag "message" do %>
+        <%= render 'messages/form', message: current_room.messages.new %>
+      <% end %>
+    </div>
+
+  </div>
+  <% end %>
+
+  <hr />
+
+  <h2 class="text-xl font-bold my-6">Salas de Chat</h2>
+  <%= turbo_stream_from "rooms" %>
+  <%= turbo_frame_tag "rooms" do %>
+    <div class="grid grid-cols-3 gap-6 align-top" id="rooms">
+      <%= render @rooms %>
+    </div>
+  <% end %>
+</div>

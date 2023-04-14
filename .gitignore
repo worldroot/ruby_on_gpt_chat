@@ -1,0 +1,31 @@
+# Arquivos de configuração do sistema
+/.bundle
+/db/*.sqlite3
+/log/*.log
+/tmp
+
+# Dependências
+/node_modules
+/yarn-error.log
+
+# Arquivos gerados pelo Rails
+/public/packs
+/public/assets
+/public/uploads
+/public/system
+
+# Arquivos gerados pelo sistema operacional
+.DS_Store
+Thumbs.db
+
+# Arquivos de ambiente
+.env
+.env.*
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Outros arquivos
+.ruby-version
+.idea/

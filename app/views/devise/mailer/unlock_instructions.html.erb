@@ -1,0 +1,8 @@
+<div class="bg-gray-100 rounded-lg p-6">
+  <p class="mb-4">Olá <%= @resource.email %>!</p>
+  <p class="mb-4">Sua conta foi bloqueada por várias tentativas de login malsucedidas.</p>
+  <p class="mb-4">Para desbloquear sua conta, clique no botão abaixo:</p>
+  <%= link_to 'Desbloquear minha conta', unlock_url(@resource, unlock_token: @token), class: 'bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline' %>
+  <p class="mt-4">Obrigado,</p>
+  <p><%= mailer_name.capitalize %></p>
+</div>
