@@ -15,8 +15,15 @@ require 'faker'
     )
   end
 end
-user = User.create!(name: 'RToledo DEV', email: 'rodrigo@rtoledo.inf.br', password: 'aassdd123',
-                    password_confirmation: 'aassdd123')
+user = User.create!(name: 'RToledo DEV', email: 'rodrigo@rtoledo.inf.br', password: ENV.fetch('DEFAULT_PASSWORD', nil),
+                    password_confirmation: ENV.fetch('DEFAULT_PASSWORD', nil))
+user.rooms.create!(
+  title: Faker::Lorem.sentence(word_count: 3),
+  description: Faker::Lorem.paragraph
+)
+
+user = User.create!(name: 'Admin', email: 'admin@test.com', password: ENV.fetch('DEFAULT_PASSWORD', nil),
+                    password_confirmation: ENV.fetch('DEFAULT_PASSWORD', nil))
 user.rooms.create!(
   title: Faker::Lorem.sentence(word_count: 3),
   description: Faker::Lorem.paragraph

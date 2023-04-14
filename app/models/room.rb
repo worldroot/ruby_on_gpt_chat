@@ -5,16 +5,16 @@ class Room < ApplicationRecord
   belongs_to :user
 
   after_create do
-    # broadcast_replace_to(
-    #   'room',
-    #   target: 'room',
-    #   partial: 'rooms/form',
-    #   locals: { room: Room.new }
-    # )
+    broadcast_replace_to(
+      'room',
+      target: 'room',
+      partial: 'rooms/form',
+      locals: { room: Room.new }
+    )
 
     broadcast_prepend_to(
       'rooms',
-      target: 'rooms',
+      target: 'collection_rooms',
       partial: 'rooms/room',
       locals: { room: self }
     )
